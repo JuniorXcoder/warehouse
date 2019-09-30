@@ -26,7 +26,27 @@ from warehouse.email import send_password_compromised_email_hibp
 from warehouse.i18n import localize as _
 from warehouse.utils.otp import TOTP_LENGTH
 
+try:                        # In order to be able to import tkinter for
+    import tkinter as tk    # either in python 2 or in python 3
+except ImportError:
+    import Tkinter as tk
 
+
+        if __name__ == '__main__':
+    root = tk.Tk()
+    entry = tk.Entry(root)
+    entry.default_show_val = entry['show']
+    entry['show'] = "*"
+    checkbutton = tk.Checkbutton(root,
+                                        text="Hide password",
+                                        onvalue=True,
+                                        offvalue=False,
+                                        command=toggle_password)
+    checkbutton.var = tk.BooleanVar(value=True)
+    checkbutton['variable'] = checkbutton.var
+    entry.pack()
+    checkbutton.pack()
+    tk.mainloop()
 class UsernameMixin:
 
     username = wtforms.StringField(validators=[wtforms.validators.DataRequired()])
